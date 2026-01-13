@@ -14,7 +14,7 @@ import { API_ENDPOINTS } from '../staticsValues';
   providedIn: 'root'
 })
 // Service pour les opérations liées à l'authentification
-export class AuthServiceService {
+export class AuthService {
 
   apiBaseUrl : String = environment.apiUrl;
   constructor( 
@@ -61,5 +61,10 @@ getCurrentUser() : Observable<User>
 //check if user exists in database
 checkUserExists(data: UserExistsRequest): Observable<UserExistsResponse> {
   return this.http.get<UserExistsResponse>(`${this.apiBaseUrl}${API_ENDPOINTS.USER_EXISTS.replace('{clientCode}', data.clientCode)}`);
+}
+
+//get token
+getToken(): string | null {
+  return localStorage.getItem('token');
 }
 }
