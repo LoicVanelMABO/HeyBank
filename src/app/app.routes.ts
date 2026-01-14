@@ -5,27 +5,28 @@ import { TransactionsComponent } from './features/transactions/transactions.comp
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { authGuard } from './core/guards/auth.guard';
+import { HomeComponent } from './features/home/home.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full'
+        component: HomeComponent,
+        title: 'HeyBank - La banque simplifiée'
     },
     {
-        canActivate:[authGuard],
+        canActivate: [authGuard],
         title: 'Dashboard',
         path: 'dashboard',
         component: DashboardComponent
     },
     {
-        canActivate:[authGuard],
+        canActivate: [authGuard],
         title: 'Transactions',
         path: 'transactions',
         component: TransactionsComponent
     },
     {
-        canActivate:[authGuard],
+        canActivate: [authGuard],
         title: 'Profile',
         path: 'profile',
         component: ProfileComponent
