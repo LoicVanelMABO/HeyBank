@@ -1,0 +1,103 @@
+<app-auth-card title="Register to Hey Bank">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <div class="row">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name"
+          placeholder="John"
+          [class.error]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+        />
+        <span class="error-message" *ngIf="getErrorMessage('name')">
+          {{ getErrorMessage('name') }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input 
+          type="text" 
+          id="lastname" 
+          formControlName="lastname"
+          placeholder="Doe"
+          [class.error]="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched"
+        />
+        <span class="error-message" *ngIf="getErrorMessage('lastname')">
+          {{ getErrorMessage('lastname') }}
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input-wrapper">
+          <input 
+            [type]="showPassword ? 'text' : 'password'"
+            id="password" 
+            formControlName="password"
+            placeholder="••••••"
+            readonly
+            (focus)="setActiveField('password')"
+            [class.active]="activeField === 'password'"
+            [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          />
+          <button 
+            type="button" 
+            class="btn btn-danger btn-clear" 
+            (click)="clearPassword()"
+            title="Clear password"
+          >
+            X
+          </button>
+        </div>
+        <span class="error-message" *ngIf="getErrorMessage('password')">
+          {{ getErrorMessage('password') }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input-wrapper">
+          <input 
+            [type]="showPassword ? 'text' : 'password'"
+            id="confirmPassword" 
+            formControlName="confirmPassword"
+            placeholder="••••••"
+            readonly
+            (focus)="setActiveField('confirmPassword')"
+            [class.active]="activeField === 'confirmPassword'"
+            [class.error]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+          />
+          <button 
+            type="button" 
+            class="btn btn-danger btn-clear" 
+            (click)="clearPassword()"
+            title="Clear password"
+          >
+            X
+          </button>
+        </div>
+        <span class="error-message" *ngIf="getErrorMessage('confirmPassword')">
+          {{ getErrorMessage('confirmPassword') }}
+        </span>
+      </div>
+    </div>
+
+    <app-digit-pad 
+      (digitClick)="onDigitClick($event)"
+      (clear)="clearPassword()"
+      (deleteLast)="clearLastDigit()"
+    ></app-digit-pad>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="isLoading()">
+     {{ isLoading() ? 'Registering...' : 'Register' }}
+    </button>
+  </form>
+
+  <div class="footer-link">
+    Already have an account? <a routerLink="/login">Login</a>
+  </div>
+</app-auth-card>

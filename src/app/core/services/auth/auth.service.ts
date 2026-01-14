@@ -24,10 +24,15 @@ export class AuthService {
     }
 
 // Register a new user
-register(userData: RegisterRequest) : Observable<AuthResponse>
+register(userData: RegisterRequest) : Observable<User>
 {
   let registerResponse = this.http.post<AuthResponse>(`${this.apiBaseUrl}/auth/register`, userData);
-  return registerResponse;
+  return registerResponse.pipe(
+    map(response => {
+      localStorage.setItem('token', response.jwt);
+      return response.user;
+    })
+  );
 
 }
 
