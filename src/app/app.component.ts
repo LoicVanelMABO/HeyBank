@@ -1,12 +1,11 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { LoginComponent } from "./features/auth/login/login.component";
-import { RegisterComponent } from "./features/auth/register/register.component";
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, RegisterComponent],
+  imports: [RouterLink, RouterOutlet,NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
