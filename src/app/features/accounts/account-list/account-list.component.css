@@ -1,0 +1,56 @@
+.account-selector {
+  margin: 20px 0;
+}
+
+select {
+  padding: 8px;
+  width: 250px;
+  font-size: 16px;
+}
+
+.account-card {
+  margin-top: 20px;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  background: #f5f7fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.balance {
+  color: #2e7d32;
+  font-size: 18px;
+}
+
+.details-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.create-btn {
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.create-btn:hover {
+  background-color: #125aa3;
+}
+
+.info-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background-color: #455a64;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

@@ -1,0 +1,58 @@
+<h2>Mes comptes bancaires</h2>
+
+<button class="create-btn" [routerLink]="['/accounts/create']">
+  ➕ Ouvrir un nouveau compte
+</button>
+
+<div class="account-selector">
+  <label for="account">Choisir un compte :</label>
+
+  <select
+    id="account"
+    #accountSelect
+    (change)="onAccountChange(accountSelect.value)"
+  >
+    <option value="">-- Sélectionner un compte --</option>
+    <option *ngFor="let account of accounts" [value]="account.id">
+      {{ account.label }}
+    </option>
+  </select>
+</div>
+
+<div *ngIf="selectedAccount" class="account-card">
+  <h3>{{ selectedAccount.label }}</h3>
+
+  <p>
+    <strong>Solde :</strong>
+    <span class="balance">
+      {{ selectedAccount.balance | number:'1.2-2' }} €
+    </span>
+  </p>
+
+  <p>
+    <strong>ID :</strong> {{ selectedAccount.id }}
+  </p>
+
+  <a
+    class="details-link"
+    [routerLink]="['/accounts', selectedAccount.id]"
+  >
+    Voir le détail du compte
+  </a>
+</div>
+
+<div *ngIf="selectedAccount" class="account-card">
+  <h3>{{ selectedAccount.label }}</h3>
+
+  <p>
+    <strong>Solde :</strong>
+    {{ selectedAccount.balance | number:'1.2-2' }} €
+  </p>
+
+  <button
+    class="info-btn"
+    [routerLink]="['/accounts', selectedAccount.id]"
+  >
+    ℹ️ Infos du compte
+  </button>
+</div>

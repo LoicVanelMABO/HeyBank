@@ -1,0 +1,21 @@
+<h2>Détails du compte</h2>
+
+<div *ngIf="account" class="details-card">
+
+  <p><strong>ID :</strong> {{ account.id }}</p>
+
+  <p><strong>Nom du compte :</strong> {{ account.label }}</p>
+
+  <p>
+    <strong>Date d’ouverture :</strong>
+    {{ account.createdAt | date:'dd/MM/yyyy' }}
+  </p>
+
+  <p>
+    <strong>Solde :</strong>
+    {{ account.balance | number:'1.2-2' }} €
+  </p>
+
+</div>
+
+<a routerLink="/accounts">⬅ Retour aux comptes</a>

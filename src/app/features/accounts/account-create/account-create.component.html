@@ -1,0 +1,31 @@
+<h2>Ouvrir un nouveau compte</h2>
+
+<form (ngSubmit)="submit()" #accountForm="ngForm">
+
+  <div class="form-group">
+    <label for="label">Nom du compte</label>
+    <input
+      id="label"
+      type="text"
+      [(ngModel)]="label"
+      name="label"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="balance">Montant initial (€)</label>
+    <input
+      id="balance"
+      type="number"
+      [(ngModel)]="initialBalance"
+      name="balance"
+      min="0"
+      required
+    />
+  </div>
+
+  <button type="submit" [disabled]="!accountForm.valid">
+    Créer le compte
+  </button>
+</form>
