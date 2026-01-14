@@ -26,4 +26,12 @@ export class HeaderComponent {
     navigateToProfile() {
         this._router.navigate(['/profile']);
     }
+
+    // ...existing code...
+
+isActiveUrl(route: string): boolean {
+  return this._router.url === route;
+}
+
+// ...existing code...
 }

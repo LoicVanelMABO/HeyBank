@@ -52,13 +52,13 @@ login(loginData: LoginRequest) : Observable<User>
 getCurrentUser() : Observable<User>
 {
   let token = localStorage.getItem('token') || '';
-  let userProfileResponse = this.http.get<AuthResponse>(`${this.apiBaseUrl}${API_ENDPOINTS.USER_PROFILE}`, {
+  let userProfileResponse = this.http.get<User>(`${this.apiBaseUrl}${API_ENDPOINTS.USER_PROFILE}`, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
   });
   return userProfileResponse.pipe(
-    map(response => response.user)
+    map(response => response)
   );
 
 }
