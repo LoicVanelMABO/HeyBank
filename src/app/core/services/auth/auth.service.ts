@@ -39,7 +39,7 @@ register(userData: RegisterRequest) : Observable<User>
 // Login an existing user
 login(loginData: LoginRequest) : Observable<User>
 {
-  let loginResponse = this.http.post<AuthResponse>(`${this.apiBaseUrl} ${API_ENDPOINTS.LOGIN}`, loginData);
+  let loginResponse = this.http.post<AuthResponse>(`${this.apiBaseUrl}${API_ENDPOINTS.LOGIN}`, loginData);
   return loginResponse.pipe(
     map(response => {
       localStorage.setItem('token', response.jwt);

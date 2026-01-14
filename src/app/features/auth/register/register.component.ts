@@ -78,7 +78,7 @@ export class RegisterComponent {
       console.log('Register:', this.registerForm.value);
 
       const registerData: RegisterRequest = {
-        name: this.registerForm.value.name,
+        name: ` ${this.registerForm.value.name} ${this.registerForm.value.lastname} `,
         password: this.registerForm.value.password
       }
 
@@ -86,8 +86,13 @@ export class RegisterComponent {
         next: (response) => {
           console.log('Registration successful:', response); 
           alert('Registration successful! You will be redirected to your dashboard.');
+          alert(`Please note your client code: ${response.clientCode}`);
           this._router.navigate(['/dashboard']);
-        }});
+        },
+      error: (error) => {
+        console.error('Registration failed:', error);
+        alert('Registration failed! Please try again later.');}
+      });
 
     } else {
       Object.keys(this.registerForm.controls).forEach(key => {

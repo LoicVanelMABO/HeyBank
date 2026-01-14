@@ -1,0 +1,62 @@
+<app-auth-card title="Login to Hey Bank">
+  <!-- Formulaire -->
+  <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
+
+    <!-- Champ Email -->
+    <div class="form-group">
+      <label for="clientCode">Client Code</label>
+      <input 
+        type="number" 
+        id="clientCode" 
+        formControlName="clientCode"
+        placeholder="123456"
+        [class.error]="loginForm.get('clientCode')?.invalid && loginForm.get('clientCode')?.touched"
+      />
+        <span class="error-message" *ngIf="getErrorMessage('lastname')">
+          {{ getErrorMessage('lastname') }}
+        </span>
+    </div>
+
+    <!-- Champ Mot de passe -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <div class="password-input-wrapper">
+        <input 
+          [type]="showPassword ? 'text' : 'password'"
+          id="password" 
+          formControlName="password"
+          placeholder="••••••"
+          readonly
+          [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        />
+        <button 
+          type="button" 
+          class="btn btn-danger btn-clear" 
+          (click)="clearPassword()"
+          title="Clear password"
+        >
+          X
+        </button>
+      </div>
+      <span class="error-message" *ngIf="getErrorMessage('password')">
+        {{ getErrorMessage('password') }}
+      </span>
+    </div>
+
+    <!-- Digicode -->
+    <app-digit-pad 
+      (digitClick)="onDigitClick($event)"
+      (deleteLast)="clearLastDigit()"
+    ></app-digit-pad>
+
+    <!-- Bouton de connexion -->
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="isLoading()">
+      {{ isLoading() ? 'Logging in...' : 'Login' }}
+    </button>
+  </form>
+
+  <!-- Lien vers inscription -->
+  <div class="footer-link">
+    Don't have an account? <a routerLink="/register">Register</a>
+  </div>
+</app-auth-card>
