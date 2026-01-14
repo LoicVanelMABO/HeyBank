@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NgClass,CommonModule, DatePipe,CurrencyPipe } from '@angular/common';
+import { NgClass,CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [CommonModule,NgClass,DatePipe,CurrencyPipe],
+  imports: [NgClass,DatePipe,CurrencyPipe],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css'
 })
