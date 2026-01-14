@@ -14,11 +14,11 @@ export const routes: Routes = [
         path: 'register',
         component: RegisterComponent
     }
-  {
-//       path: '',
-//     component: TransactionsComponent,
-//     title: 'Transactions Page',
-// }
+    // {
+    //       path: '',
+    //     component: TransactionsComponent,
+    //     title: 'Transactions Page',
+    // }
 ];
 
 

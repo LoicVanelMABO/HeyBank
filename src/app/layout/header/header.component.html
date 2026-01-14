@@ -1,0 +1,24 @@
+<header class="header">
+    <div class="container">
+        <a href="/" class="logo">
+            <img src="assets/images/stripe-logo.png" alt="Hey Bank Logo" class="logo-img">
+        </a>
+
+        <button class="mobile-menu-btn" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-menu" [class.open]="isMenuOpen">
+            <ul>
+                <li><a href="#" class="nav-link active">Dashboard</a></li>
+                <li><a href="#" class="nav-link">Comptes</a></li>
+                <li><a href="#" class="nav-link">Transactions</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn-signup">Connexion</button>
+            </div>
+        </nav>
+    </div>
+</header>
