@@ -1,0 +1,14 @@
+<div class="quick-actions-grid">
+  <button
+    *ngFor="let action of actions"
+    class="action-card"
+    (click)="onActionClick(action)"
+    [style.--action-color]="action.color"
+  >
+    <div class="action-card__icon">{{ action.icon }}</div>
+    <div class="action-card__content">
+      <div class="action-card__title">{{ action.title }}</div>
+      <div class="action-card__description">{{ action.description }}</div>
+    </div>
+  </button>
+</div>
