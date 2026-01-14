@@ -1,31 +1,75 @@
-<h2>Ouvrir un nouveau compte</h2>
+<div class="create-account-page">
 
-<form (ngSubmit)="submit()" #accountForm="ngForm">
+  <div class="create-account-container">
+    
+    <!-- Header -->
+    <div class="create-header">
+      <h1>Créer un nouveau compte</h1>
+      <p>Ouvrez facilement un compte en quelques secondes</p>
+    </div>
 
-  <div class="form-group">
-    <label for="label">Nom du compte</label>
-    <input
-      id="label"
-      type="text"
-      [(ngModel)]="label"
-      name="label"
-      required
-    />
+    <!-- Form Card -->
+    <div class="form-card">
+      
+      <form (ngSubmit)="submit()" #accountForm="ngForm">
+
+        <!-- Account Name -->
+        <div class="form-group">
+          <label for="label">
+            Nom du compte
+          </label>
+          <input
+            id="label"
+            type="text"
+            [(ngModel)]="label"
+            name="label"
+            placeholder="ex: Compte Courant, Épargne..."
+            required
+          />
+          
+        </div>
+
+        <!-- Initial Balance -->
+        <div class="form-group">
+          <label for="balance">
+            Montant initial 
+          </label>
+          <input
+            id="balance"
+            type="number"
+            [(ngModel)]="initialBalance"
+            name="balance"
+            placeholder="0,00"
+            min="0"
+            step="1"
+            required
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-block"
+          [disabled]="!accountForm.valid"
+        >
+          {{ !accountForm.valid ? 'Remplissez tous les champs' : 'Créer le compte' }}
+        </button>
+
+      </form>
+
+      <!-- Info Box -->
+      <div class="info-box">
+        <span class="info-icon">ℹ️</span>
+        <p>Votre nouveau compte sera activé immédiatement et prêt à l'emploi</p>
+      </div>
+
+    </div>
+
+    <!-- Back Link -->
+    <div class="back-link">
+      <a [routerLink]="['/accounts']">← Retour à mes comptes</a>
+    </div>
+
   </div>
 
-  <div class="form-group">
-    <label for="balance">Montant initial (€)</label>
-    <input
-      id="balance"
-      type="number"
-      [(ngModel)]="initialBalance"
-      name="balance"
-      min="0"
-      required
-    />
-  </div>
-
-  <button type="submit" [disabled]="!accountForm.valid">
-    Créer le compte
-  </button>
-</form>
+</div>

@@ -1,35 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { AccountService } from '../account.service';
-import { Account } from '../account.model';
+import { Account } from '../../../core/models/account/Account';
+import { AccountService } from '../../../core/services/accounts/account.service';
 
 @Component({
   selector: 'app-account-list',
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './account-list.component.html',
-  styleUrl: './account-list.component.css',
+  styleUrl: './account-list.component.css'
 })
 export class AccountListComponent implements OnInit {
 
   accounts: Account[] = [];
-  selectedAccount?: Account;
+  isLoading = true;
+  totalBalance = 0;
 
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
-  this.loadAccounts();
-}
+    this.accountService.getAccounts().subscribe(accounts => {
+      this.accounts = accounts;
+      this.calculateTotalBalance();
+      this.isLoading = false;
+    });
+  }
 
-loadAccounts(): void {
-  this.accountService.getAccounts().subscribe(accounts => {
-    this.accounts = accounts;
-    this.selectedAccount = undefined;
-  });
-}
+  calculateTotalBalance(): void {
+    this.totalBalance = this.accounts.reduce((sum, acc) => sum + acc.balance, 0);
+  }
 
-  onAccountChange(accountId: string): void {
-    this.selectedAccount = this.accounts.find(acc => acc.id === accountId);
+  getAccountInitial(label: string): string {
+    return label ? label.charAt(0).toUpperCase() : '?';
   }
 }

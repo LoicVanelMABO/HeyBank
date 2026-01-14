@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { AccountService } from '../account.service';
-import { Account } from '../account.model';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Account } from '../../../core/models/account/Account';
+import { AccountService } from '../../../core/services/accounts/account.service';
 
 @Component({
   selector: 'app-account-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './account-details.component.html',
   styleUrl: './account-details.component.css'
 })
@@ -24,7 +24,7 @@ export class AccountDetailsComponent implements OnInit {
     const accountId = this.route.snapshot.paramMap.get('id');
 
     if (accountId) {
-      this.accountService.getAccountById(accountId)
+      this.accountService.getOneAccount(accountId)
         .subscribe(account => {
           this.account = account;
         });
