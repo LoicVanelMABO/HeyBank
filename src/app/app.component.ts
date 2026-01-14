@@ -11,4 +11,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'heyBank';
+  _router: Router;
+
+  constructor(router: Router) {
+    this._router = router;
+  }
 }

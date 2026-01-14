@@ -72,4 +72,15 @@ checkUserExists(data: UserExistsRequest): Observable<UserExistsResponse> {
 getToken(): string | null {
   return localStorage.getItem('token');
 }
+
+// Check if user is logged in
+isLoggedIn(): boolean {
+  const token = this.getToken();
+  // Simple check for token existence; in real apps, consider token expiration
+  return !!token; 
+}
+
+// Logout user
+logout(): void {  localStorage.removeItem('token');}
+
 }
