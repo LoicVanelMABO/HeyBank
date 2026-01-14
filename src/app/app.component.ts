@@ -1,18 +1,20 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, NgIf, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'heyBank';
+  _router: Router;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) { 
+    this._router = router;
+  }
 }
 

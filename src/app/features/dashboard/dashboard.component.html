@@ -1,0 +1,61 @@
+<div class="dashboard-container">
+  <!-- En-tête -->
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p class="subtitle">Bienvenue sur votre espace bancaire</p>
+  </div>
+
+  <!-- Erreur -->
+  <div *ngIf="error" class="error-banner">
+    <span>⚠️ {{ error }}</span>
+    <button class="btn btn-secondary" (click)="refreshData()">Retry</button>
+  </div>
+
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement de vos données...</p>
+  </div>
+
+  <!-- Contenu -->
+  <div *ngIf="!isLoading && !error">
+    <!-- Statistiques -->
+    <div class="stats-grid">
+      <app-stats-card
+        title="Nombre de comptes"
+        [value]="stats.accountsCount"
+        icon="💳"
+        color="primary"
+      ></app-stats-card>
+
+      <app-stats-card
+        title="Transactions en attente"
+        [value]="stats.pendingTransactions"
+        icon="⏳"
+        color="warning"
+      ></app-stats-card>
+
+      <app-stats-card
+        title="Solde total"
+        [value]="stats.totalBalance"
+        [isCurrency]="true"
+        icon="💰"
+        color="success"
+      ></app-stats-card>
+
+      <app-stats-card
+        title="Cashback"
+        [value]="stats.cashback"
+        [isCurrency]="true"
+        icon="🎁"
+        color="info"
+      ></app-stats-card>
+    </div>
+
+    <!-- Actions rapides -->
+    <div class="quick-actions-section">
+      <h2>Actions rapides</h2>
+      <app-quick-actions></app-quick-actions>
+    </div>
+  </div>
+</div>

@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 backlog.pdf
 TASK_DISTRIBUTION.md
+src/app/features/dashboard/README.md
