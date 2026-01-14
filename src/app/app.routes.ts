@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login.component';
 import { TransactionsComponent } from './features/transactions/transactions.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -11,11 +12,13 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        canActivate:[authGuard],
         title: 'Dashboard',
         path: 'dashboard',
         component: DashboardComponent
     },
     {
+        canActivate:[authGuard],
         title: 'Transactions',
         path: 'transactions',
         component: TransactionsComponent
@@ -30,9 +33,4 @@ export const routes: Routes = [
         path: 'register',
         component: RegisterComponent
     }
- // {
-//       path: '',
-//     component: TransactionsComponent,
-//     title: 'Transactions Page',
-// }
 ];
