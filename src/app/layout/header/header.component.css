@@ -71,6 +71,18 @@
     margin-left: 1rem;
 }
 
+.btn-profile {
+    background: #1A8D5D;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3);
+}
+
 .btn-login {
     background: transparent;
     border: none;
