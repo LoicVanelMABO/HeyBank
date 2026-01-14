@@ -1,0 +1,20 @@
+<div class="digit-pad">
+  <button 
+    *ngFor="let digit of digitButtons" 
+    type="button"
+    class="digit-button"
+    [class.empty]="digit === null"
+    (click)="onDigitClick(digit)"
+    [disabled]="digit === null"
+  >
+    {{ digit !== null ? digit : '' }}
+  </button>
+  <button 
+    type="button"
+    class="digit-button del-button"
+    (click)="onDeleteLast()"
+    title="Delete last digit"
+  >
+    DEL
+  </button>
+</div>
