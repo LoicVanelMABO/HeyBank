@@ -22,13 +22,13 @@ export class AccountCreateComponent {
   ) {}
 
   submit(): void {
-    console.log('SUBMIT CALLED'); // 👈 DEBUG IMPORTANT
+    console.log('SUBMIT CALLED'); 
 
     this.accountService.createAccount({
       label: this.label,
       initialBalance: this.initialBalance
     }).subscribe(() => {
-      console.log('ACCOUNT CREATED'); // 👈 DEBUG IMPORTANT
+      console.log('ACCOUNT CREATED');
       this.router.navigate(['/accounts']);
     });
   }
