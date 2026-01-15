@@ -1,0 +1,161 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <!-- FORMULAIRE DE CRÉATION -->
+      <div *ngIf="viewMode === 'form'" class="card shadow-sm">
+        <div class="card-body">
+
+          <h4 class="mb-3 text-center">
+            💸 Nouvelle transaction depuis <span class="fw-bold">{{ account?.label || 'Chargement...' }}</span>
+          </h4>
+
+          <!-- Erreur globale -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <form [formGroup]="formTransaction" (ngSubmit)="submit()">
+            <!-- Compte destinataire -->
+            <div class="mb-3">
+              <label class="form-label">Compte destinataire (ID)</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="receiverAccountId"
+                placeholder="Entrez l'ID du compte destinataire"
+                [class.is-invalid]="formTransaction.get('receiverAccountId')?.invalid && formTransaction.get('receiverAccountId')?.touched">
+              <div class="invalid-feedback" *ngIf="formTransaction.get('receiverAccountId')?.invalid && formTransaction.get('receiverAccountId')?.touched">
+                L'ID du compte destinataire est requis.
+              </div>
+            </div>
+
+            <!-- Montant -->
+            <div class="mb-3">
+              <label class="form-label">Montant (€)</label>
+              <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                formControlName="amount"
+                placeholder="0.00"
+                [class.is-invalid]="formTransaction.get('amount')?.invalid && formTransaction.get('amount')?.touched">
+              <div class="invalid-feedback" *ngIf="formTransaction.get('amount')?.invalid && formTransaction.get('amount')?.touched">
+                Le montant doit être supérieur à 0.
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                formControlName="description"
+                rows="3"
+                placeholder="Motif de la transaction"
+                [class.is-invalid]="formTransaction.get('description')?.invalid && formTransaction.get('description')?.touched"></textarea>
+              <div class="invalid-feedback" *ngIf="formTransaction.get('description')?.invalid && formTransaction.get('description')?.touched">
+                La description est requise.
+              </div>
+            </div>
+
+            <!-- Bouton de soumission -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="loading || !account">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ loading ? "Envoi en cours..." : "Envoyer" }}
+            </button>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- DÉTAILS DE LA TRANSACTION CRÉÉE -->
+      <div *ngIf="viewMode === 'details' && createdTransaction" class="card shadow-sm">
+        <div class="card-body">
+
+          <h4 class="mb-4 text-center text-success">
+            ✅ Transaction créée avec succès
+          </h4>
+
+          <!-- Informations de la transaction -->
+          <div class="transaction-details mb-4">
+            <div class="row mb-3">
+              <div class="col-5 text-muted">ID Transaction :</div>
+              <div class="col-7 text-break"><small>{{ createdTransaction.id }}</small></div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5 text-muted">Montant :</div>
+              <div class="col-7 fw-bold text-primary fs-5">{{ createdTransaction.amount | currency:'EUR' }}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5 text-muted">Description :</div>
+              <div class="col-7">{{ createdTransaction.description }}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5 text-muted">Destinataire :</div>
+              <div class="col-7">{{ createdTransaction.receiver.owner.name }}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5 text-muted">Date :</div>
+              <div class="col-7">{{ createdTransaction.emittedAt | date:'dd/MM/yyyy à HH:mm' }}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-5 text-muted">Statut :</div>
+              <div class="col-7">
+                <span 
+                  class="badge"
+                  [class.bg-warning]="createdTransaction.status === 'pending'"
+                  [class.bg-success]="createdTransaction.status === 'completed'"
+                  [class.bg-danger]="createdTransaction.status === 'cancelled'">
+                  {{ createdTransaction.status | uppercase }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message de succès d'annulation -->
+          <div *ngIf="cancelSuccessMessage" class="alert alert-success">
+            {{ cancelSuccessMessage }}
+          </div>
+
+          <!-- Erreur d'annulation -->
+          <div *ngIf="cancelErrorMessage" class="alert alert-danger">
+            {{ cancelErrorMessage }}
+          </div>
+
+          <!-- Boutons d'action -->
+          <div class="d-grid gap-2">
+            <!-- Bouton annuler (visible uniquement si transaction non complétée/annulée) -->
+            <button
+              *ngIf="canCancelTransaction()"
+              type="button"
+              class="btn btn-danger"
+              [disabled]="cancelingTransaction"
+              (click)="cancelTransaction()">
+              <span *ngIf="cancelingTransaction" class="spinner-border spinner-border-sm me-2"></span>
+              {{ cancelingTransaction ? "Annulation..." : "Annuler la transaction" }}
+            </button>
+
+            <!-- Bouton nouvelle transaction -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="createNewTransaction()">
+              Nouvelle transaction
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

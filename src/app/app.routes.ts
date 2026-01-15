@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
-import { TransactionsComponent } from './features/transactions/transactions.component';
-import { CreateTransactionComponent } from './features/create-transaction/create-transaction.component';
+import { TransactionsComponent } from './features/transactions/transactionList/transactions.component';
+import { CreateTransactionComponent } from './features/transactions/create-transaction/create-transaction.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { authGuard } from './core/guards/auth.guard';

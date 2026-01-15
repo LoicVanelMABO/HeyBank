@@ -16,9 +16,7 @@
                         class="nav-link">Dashboard</a></li>
                 <li><a [class.active]="isActiveUrl('/accounts')" [routerLink]="'/accounts'" class="nav-link">Comptes</a>
                 </li>
-                <li><a [class.active]="isActiveUrl('/transactions')" [routerLink]="'/transactions'"
-                        class="nav-link">Transactions</a>
-                </li>
+                
             </ul>
             <div *ngIf="!isLoginedIn()" class="auth-buttons">
                 <a routerLink="/login" class="btn-login">Connexion</a>
