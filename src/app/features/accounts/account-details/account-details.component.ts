@@ -12,6 +12,13 @@ import { AccountService } from '../../../core/services/accounts/account.service'
   styleUrl: './account-details.component.css'
 })
 export class AccountDetailsComponent implements OnInit {
+copyToClipboard(valueToCopy: string) {
+  navigator.clipboard.writeText(valueToCopy).then(() => {
+    alert('Copié : '+valueToCopy);
+  }).catch(() => {
+    console.error('Erreur lors de la copie');
+  });
+}
 
   account?: Account;
 

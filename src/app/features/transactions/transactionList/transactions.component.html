@@ -69,18 +69,31 @@
               </div>
 
               <div>
-                <span class="badge"
+                <span *ngIf="t.status!='canceled'" class="badge"
                   [class.text-success]="t.emitter.owner.name !== currentUser?.name"
                   [class.text-danger]="t.emitter.owner.name === currentUser?.name">
                   {{ t.emitter.owner.name !== currentUser?.name ? '+' : '-' }}
                   {{ t.amount | currency:'EUR' }}
                 </span><br>
-                <span
-                  class="badge"
+                <span *ngIf="t.status=='canceled'" class="badge" style="color: black;">
+                  <del>
+                  {{ t.amount | currency:'EUR' }}
+                  </del>
+                </span><br *ngIf="t.status=='canceled'">
+                
+                <span *ngIf="t.status=='canceled'" class="badge"
+                  [class.bg-success]="t.emitter.owner.name !== currentUser?.name"
+                  [class.bg-danger]="t.emitter.owner.name === currentUser?.name"><del>
+                  {{ t.emitter.owner.name !== currentUser?.name ? 'CREDIT' : 'DEBIT' }}
+                  </del>
+                </span><br *ngIf="t.status=='canceled'">
+
+                <span *ngIf="t.status !='canceled'" class="badge"
                   [class.bg-success]="t.emitter.owner.name !== currentUser?.name"
                   [class.bg-danger]="t.emitter.owner.name === currentUser?.name">
                   {{ t.emitter.owner.name !== currentUser?.name ? 'CREDIT' : 'DEBIT' }}
-                </span><br>
+                </span><br *ngIf="t.status!='canceled'">
+
                 <span
                   [class.text-warning]="t.status !== 'completed'">
                   {{t.status}}
