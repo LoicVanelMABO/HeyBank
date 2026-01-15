@@ -1,45 +1,107 @@
-<div class="transactions-container">
-  <h2>Historique des transactions</h2>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
 
-  <table class="transactions-table">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Montant</th>
-        <th>Solde</th>
-      </tr>
-    </thead>
+      <h3 class="mb-4 text-center">💳 Liste de Transactions : {{ _account.label }}</h3>
 
-    <tbody>
-      <tr *ngFor="let transaction of transactions">
-        <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
-        <td>{{ transaction.description }}</td>
-        <td>
-          <span 
-            [ngClass]="{
-              'credit': transaction.type === 'CREDIT',
-              'debit': transaction.type === 'DEBIT'
-            }">
-            {{ transaction.type }}
-          </span>
-        </td>
-        <td 
-          [ngClass]="{
-            'credit': transaction.type === 'CREDIT',
-            'debit': transaction.type === 'DEBIT'
-          }">
-          {{ transaction.amount | currency:'EUR' }}
-        </td>
-        <td>{{ transaction.balance | currency:'EUR' }}</td>
-      </tr>
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Rechercher..."
+          [(ngModel)]="filterText">
+      </div>
+      <div class="mb-3">
+        <select class="form-select" [(ngModel)]="filterStatus">
+          <option value="all">Tous</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+          <option value="failed">Failed</option>
+        </select>
+      </div>
 
-      <tr *ngIf="transactions.length === 0">
-        <td colspan="5" class="empty">
-          Aucune transaction disponible
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="text-center my-4">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2 text-muted">Chargement des transactions...</p>
+      </div>
+
+      <!-- Liste des transactions -->
+      <div *ngIf="!loading && transactions.length > 0">
+        <div
+          class="card shadow-sm mb-3 p-0 border-0"
+          *ngFor="let t of displayedTransactions">
+
+          <div class="card-body">
+            <!-- Ligne principale -->
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <!-- NOUVELLE LIGNE -->
+                <small class="text-muted d-block">
+                  <ng-container *ngIf="t.emitter.owner.name === currentUser.name; else credit">
+                    <div class="avatar">
+                      {{ t.receiver.owner.name.charAt(0) | uppercase }}
+                    </div>
+                    À : <strong>{{ t.receiver.owner.name }}</strong>
+                  </ng-container>
+
+                  <ng-template #credit>
+                    <div class="avatar">
+                      {{ t.emitter.owner.name.charAt(0) | uppercase }}
+                    </div>
+                    De : <strong>{{ t.emitter.owner.name }}</strong>
+                  </ng-template>
+                </small>
+
+                <small class="text-muted">
+                  {{ t.emittedAt | date:'dd MMM yyyy' }}
+                </small>
+                
+                <h6 class="mb-1">{{ t.description }}</h6>
+              </div>
+
+              <div>
+                <span class="badge"
+                  [class.text-success]="t.emitter.owner.name !== currentUser.name"
+                  [class.text-danger]="t.emitter.owner.name === currentUser.name">
+                  {{ t.emitter.owner.name !== currentUser.name ? '+' : '-' }}
+                  {{ t.amount | currency:'EUR' }}
+                </span><br>
+                <span
+                  class="badge"
+                  [class.bg-success]="t.emitter.owner.name !== currentUser.name"
+                  [class.bg-danger]="t.emitter.owner.name === currentUser.name">
+                  {{ t.emitter.owner.name !== currentUser.name ? 'CREDIT' : 'DEBIT' }}
+                </span><br>
+                <span
+                  [class.text-warning]="t.status !== 'completed'">
+                  {{t.status}}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngIf="transactions.length > 5 && !allTransaction" class="text-center">
+          <a href="#" (click)="allTrans(); $event.preventDefault()">
+            Voir toutes les transactions
+          </a>
+        </div>
+
+        <div *ngIf="transactions.length > 5 && allTransaction" class="text-center">
+          <a href="#" (click)="lessTrans(); $event.preventDefault()">
+            Voir moins de transactions
+          </a>
+        </div>
+
+
+      </div>
+
+      <!-- Aucun résultat -->
+      <div *ngIf="!loading && transactions.length === 0" class="text-center text-muted">
+        Aucune transaction disponible
+      </div>
+
+    </div>
+  </div>
 </div>

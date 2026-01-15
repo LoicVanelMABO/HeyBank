@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <h4 class="mb-3 text-center"> Nouvelle transaction depuis <span class="font-weight-bold">{{_account.label}}</span></h4>
+
+          <form [formGroup]="formTransaction" (ngSubmit)="submit()">
+            <!-- Receiver -->
+            <div class="mb-3">
+              <label class="form-label">Compte destinataire (ID Compte)</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="receiverAccountId">
+            </div>
+
+            <!-- Amount -->
+            <div class="mb-3">
+              <label class="form-label">Montant €</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="amount">
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea
+                type="text"
+                class="form-control"
+                formControlName="description"></textarea>
+            </div>
+
+            <!-- Actions -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="loading">
+              {{ loading ? "Envoi..." : "Envoyer de l'argent" }}
+            </button>
+
+          </form>
+
+          <!-- Success -->
+          <div *ngIf="success" class="alert alert-success mt-3">
+            Transaction créée avec succès ✅
+          </div>
+
+          <!-- Error -->
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
