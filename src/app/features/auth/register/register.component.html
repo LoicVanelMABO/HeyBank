@@ -2,7 +2,7 @@
   <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <div class="row">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Nom</label>
         <input 
           type="text" 
           id="name" 
@@ -16,7 +16,7 @@
       </div>
 
       <div class="form-group">
-        <label for="lastname">Last Name</label>
+        <label for="lastname">Nom de famille</label>
         <input 
           type="text" 
           id="lastname" 
@@ -32,7 +32,7 @@
 
     <div class="row">
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Mot de passe</label>
         <div class="password-input-wrapper">
           <input 
             [type]="showPassword ? 'text' : 'password'"
@@ -59,7 +59,7 @@
       </div>
 
       <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword">Confirmez le mot de passe</label>
         <div class="password-input-wrapper">
           <input 
             [type]="showPassword ? 'text' : 'password'"
@@ -98,6 +98,6 @@
   </form>
 
   <div class="footer-link">
-    Already have an account? <a routerLink="/login">Login</a>
+    Vous avez déjà un compte ? <a routerLink="/login">Se connecter</a>
   </div>
 </app-auth-card>
