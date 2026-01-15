@@ -76,7 +76,7 @@ getToken(): string | null {
 // Check if user is logged in
 isLoggedIn(): boolean {
   const token = this.getToken();
-  // Simple check for token existence; in real apps, consider token expiration
+  //Vérification simple de l'existence du jeton ; dans les applications réelles, penser à l'expiration du jeton
   return !!token; 
 }
 
