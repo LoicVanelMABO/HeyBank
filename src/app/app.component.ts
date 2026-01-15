@@ -1,12 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [ RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
