@@ -21,11 +21,21 @@
         <div class="details-grid">
           <div class="detail-item">
             <span class="detail-label">ID du compte</span>
-            <span class="detail-value">{{ account.id }}</span>
+            <span class="detail-value copy-wrapper">{{ account.id }}
+                  <i class="fa-regular fa-copy copy-icon"
+                  title="Copier l'ID du compte"
+                  (click)="copyToClipboard(account.id)">
+                </i>
+            </span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Propriétaire</span>
-            <span class="detail-value">{{ account.ownerId }}</span>
+            <span class="detail-value copy-wrapper">{{ account.ownerId }}
+                  <i class="fa-regular fa-copy copy-icon"
+                    title="Copier le code client du propriétaire"
+                    (click)="copyToClipboard(account.ownerId)">
+                  </i>
+            </span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Date d'ouverture</span>
