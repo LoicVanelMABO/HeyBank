@@ -20,10 +20,14 @@ export const routes: Routes = [
        component: CreateTransactionComponent,
        title: 'Transactions Page',
     },
-    { 
-        path: '/transactions/:transactionID', 
-        component:  TransactionsComponent
-    }
+     { 
+         path: 'transactions', 
+         component:  TransactionsComponent
+     }
+    // { 
+    //     path: '/transactions/:transactionID', 
+    //     component:  TransactionsComponent
+    // }
 ];
 
 
