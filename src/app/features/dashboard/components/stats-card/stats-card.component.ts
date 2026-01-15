@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stats-card',
@@ -14,6 +15,13 @@ export class StatsCardComponent {
   @Input() icon: string = '📊';
   @Input() color: 'primary' | 'success' | 'warning' | 'info' = 'primary';
   @Input() isCurrency: boolean = false;
+  @Input() link: string = '#';
+
+  _router: Router;
+
+  constructor(router: Router) {
+    this._router = router;
+  }
 
   formatValue(): string {
     if (this.isCurrency) {
@@ -23,5 +31,9 @@ export class StatsCardComponent {
       }).format(this.value);
     }
     return this.value.toString();
+  }
+
+  navigate(): void {
+    this._router.navigateByUrl(this.link);
   }
 }

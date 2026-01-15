@@ -1,0 +1,120 @@
+<div class="accounts-page">
+
+  <!-- Skeleton Loading -->
+  <div class="skeleton-container" *ngIf="isLoading">
+    <div class="skeleton skeleton-header"></div>
+    <div class="skeleton-grid">
+      <div class="skeleton skeleton-card" *ngFor="let i of [1,2,3]"></div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div *ngIf="!isLoading" class="accounts-content">
+    
+    <!-- Header Section -->
+    <div class="accounts-header-section">
+      <div class="header-content">
+        <h1>Mes comptes bancaires</h1>
+        <p class="header-subtitle">Gérez vos comptes en un seul endroit</p>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-primary" [routerLink]="['/accounts/create']">
+          Nouveau compte
+        </button>
+      </div>
+    </div>
+
+    <!-- Balance Summary Card -->
+    <div class="balance-card" *ngIf="accounts.length > 0">
+      <div class="balance-card-content">
+        <div class="balance-info">
+          <span class="balance-label">Solde total</span>
+          <span class="balance-value">{{ totalBalance | number:'1.2-2' }} €</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="accounts.length === 0">
+      <div class="empty-illustration">🏦</div>
+      <h2>Aucun compte pour le moment</h2>
+      <p>Créez votre premier compte pour commencer avec Hey Bank</p>
+      <button class="btn btn-primary" [routerLink]="['/accounts/create']">
+        Créer un compte
+      </button>
+    </div>
+
+    <!-- Accounts List -->
+    <div class="accounts-list" *ngIf="accounts.length > 0">
+
+      <div class="accounts-title">
+        <h2>Vos comptes</h2>
+        <span class="accounts-count">{{ accounts.length }} compte(s)</span>
+      </div>
+
+      <div class="account-items">
+
+        <div
+          class="account-item"
+          *ngFor="let account of accounts"
+        >
+
+          <div class="account-header">
+            <div class="account-icon-name">
+              <div class="account-avatar">{{ getAccountInitial(account.label) }}</div>
+              <div class="account-name-type">
+                <h3>{{ account.label }}</h3>
+                <span class="account-created">Créé en {{ account.openAt | date:'MMM yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="account-balance-section">
+            <span class="balance-label">Solde</span>
+            <span class="balance-display">{{ account.balance | number:'1.2-2' }} €</span>
+          </div>
+
+          <div class="account-actions">
+            <button class="btn btn-primary" [routerLink]="['/accounts', account.id]">
+              Voir les détails
+            </button>
+            <button class="btn btn-secondary" [routerLink]="['/transactions']">
+              Transactions
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Suggested Actions Section -->
+    <div class="suggested-actions" *ngIf="accounts.length > 0">
+      
+      <!-- Contact Advisor Card -->
+      <div class="action-card advisor-card">
+        <div class="action-icon">👨‍💼</div>
+        <h3>Besoin de conseils ?</h3>
+        <p>Un expert bancaire est à votre écoute pour optimiser votre gestion financière</p>
+        <button class="btn btn-primary">
+          Prendre rendez-vous
+        </button>
+      </div>
+
+      <!-- Discover Accounts Card -->
+      <div class="action-card discovery-card">
+        <div class="action-icon">✨</div>
+        <h3>Maximisez votre épargne</h3>
+        <p>Découvrez nos solutions d'épargne et de placement les plus avantageuses</p>
+        <button class="btn btn-primary">
+          Voir toutes les options
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
