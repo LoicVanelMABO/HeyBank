@@ -1,11 +1,9 @@
-
-<!-- if is login or register directly render the component e-->
-
-@if (_router.url === '/login' || _router.url === '/register') {
-    <router-outlet></router-outlet>
-    } @else {
-    <!-- <app-header></app-header> -->
-    <router-outlet></router-outlet>
-    <!-- <app-footer></app-footer> -->
+@if (router.url === '/login' || router.url === '/register') {
+<router-outlet></router-outlet>
+} @else {
+<app-header/>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<app-footer/>
 }
-

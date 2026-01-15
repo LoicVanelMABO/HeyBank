@@ -24,8 +24,8 @@ export class LoginComponent {
 
   constructor(AuthService: AuthService, Router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      clientCode: ['', [Validators.required, Validators.minLength(3), Validators.pattern("^[0-9]*$")]],
-      password: ['', Validators.required]
+      clientCode: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8), Validators.pattern("^[0-9]*$")]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
   });
     this._authService = AuthService;
     this._router = Router;
@@ -91,20 +91,20 @@ export class LoginComponent {
     }
     
     if (control?.hasError('email') && control?.touched) {
-      return 'Please enter a valid email';
+      return 'Veuillez entrer un email valide';
     }
     
     if (control?.hasError('minlength') && control?.touched) {
       const minLength = control.errors?.['minlength'].requiredLength;
-      return `Minimum ${minLength} characters required`;
+      return `Minimum ${minLength} caractères requis`;
     }
     if (control?.hasError('maxlength') && control?.touched) {
       const maxLength = control.errors?.['maxlength'].requiredLength;
-      return `Maximum ${maxLength} characters allowed`;
+      return `Maximum ${maxLength} caractères autorisés`;
     }
     
     if (control?.hasError('passwordMismatch') && control?.touched) {
-      return 'Passwords do not match';
+      return 'Les mots de passe ne correspondent pas';
     }
     
     return '';

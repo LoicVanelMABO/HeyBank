@@ -84,14 +84,14 @@ export class RegisterComponent {
 
       this._authService.register(registerData).subscribe({
         next: (response) => {
-          console.log('Registration successful:', response); 
-          alert('Registration successful! You will be redirected to your dashboard.');
-          alert(`Please note your client code: ${response.clientCode}`);
+          console.log('Inscription réussie:', response); 
+          alert('Inscription réussie! Vous serez redirigé vers votre tableau de bord.');
+          alert(`Veuillez noter votre code client : ${response.clientCode}`);
           this._router.navigate(['/dashboard']);
         },
       error: (error) => {
-        console.error('Registration failed:', error);
-        alert('Registration failed! Please try again later.');}
+        console.error('Échec de l\'inscription:', error);
+        alert('Échec de l\'inscription! Veuillez réessayer plus tard.');}
       });
 
     } else {
@@ -106,24 +106,24 @@ export class RegisterComponent {
     const control = this.registerForm.get(field);
     
     if (control?.hasError('required') && control?.touched) {
-      return `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+      return `${field.charAt(0).toUpperCase() + field.slice(1)} est requis`;
     }
     
     if (control?.hasError('email') && control?.touched) {
-      return 'Please enter a valid email';
+      return 'Veuillez entrer un email valide';
     }
     
     if (control?.hasError('minlength') && control?.touched) {
       const minLength = control.errors?.['minlength'].requiredLength;
-      return `Minimum ${minLength} characters required`;
+      return `Minimum ${minLength} caractères requis`;
     }
     if (control?.hasError('maxlength') && control?.touched) {
       const maxLength = control.errors?.['maxlength'].requiredLength;
-      return `Maximum ${maxLength} characters allowed`;
+      return `Maximum ${maxLength} caractères autorisés`;
     }
     
     if (control?.hasError('passwordMismatch') && control?.touched) {
-      return 'Passwords do not match';
+      return 'Les mots de passe ne correspondent pas';
     }
     
     return '';

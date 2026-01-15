@@ -1,10 +1,10 @@
-<app-auth-card title="Login to Hey Bank">
+<app-auth-card title="Connectez-vous à Hey Bank">
   <!-- Formulaire -->
   <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
 
     <!-- Champ Email -->
     <div class="form-group">
-      <label for="clientCode">Client Code</label>
+      <label for="clientCode">Code Client</label>
       <input 
         type="number" 
         id="clientCode" 
@@ -19,7 +19,7 @@
 
     <!-- Champ Mot de passe -->
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password">Mot de passe</label>
       <div class="password-input-wrapper">
         <input 
           [type]="showPassword ? 'text' : 'password'"
@@ -33,7 +33,7 @@
           type="button" 
           class="btn btn-danger btn-clear" 
           (click)="clearPassword()"
-          title="Clear password"
+          title="Effacer le mot de passe"
         >
           X
         </button>
@@ -51,12 +51,12 @@
 
     <!-- Bouton de connexion -->
     <button type="submit" class="btn btn-primary btn-block" [disabled]="isLoading()">
-      {{ isLoading() ? 'Logging in...' : 'Login' }}
+      {{ isLoading() ? 'Connexion en cours...' : 'Connexion' }}
     </button>
   </form>
 
   <!-- Lien vers inscription -->
   <div class="footer-link">
-    Don't have an account? <a routerLink="/register">Register</a>
+    Vous n'avez pas de compte ? <a routerLink="/register">Inscription</a>
   </div>
 </app-auth-card>

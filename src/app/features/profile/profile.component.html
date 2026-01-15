@@ -1,0 +1,33 @@
+<div class="profile-container">
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement de votre profil...</p>
+  </div>
+
+  <!-- Erreur -->
+  <div *ngIf="error && !isLoading" class="error-state">
+    <span class="error-icon">⚠️</span>
+    <p>{{ error }}</p>
+    <button class="btn btn-secondary" (click)="loadUserProfile()">Réessayer</button>
+  </div>
+
+  <!-- Profil -->
+  <div *ngIf="user && !isLoading && !error" class="profile-card">
+    <div class="profile-avatar">
+      <span class="avatar-icon">👤</span>
+    </div>
+
+    <div class="profile-info">
+      <h1 class="profile-name">{{ user.name }}</h1>
+      <div class="profile-detail">
+        <span class="detail-label">Code client</span>
+        <span class="detail-value">{{ user.clientCode }}</span>
+      </div>
+    </div>
+
+    <button class="btn btn-danger btn-logout" (click)="logout()">
+      🚪 Se déconnecter
+    </button>
+  </div>
+</div>

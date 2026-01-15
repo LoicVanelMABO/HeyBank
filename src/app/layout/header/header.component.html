@@ -1,0 +1,32 @@
+<header class="header">
+    <div class="container">
+        <a [routerLink]="'/'" class="logo">
+            <img src="assets/images/stripe-logo.png" alt="Logo" class="logo-img">
+        </a>
+
+        <button class="mobile-menu-btn" (click)="toggleMenu()" [class.active]="isMenuOpen" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-menu" [class.open]="isMenuOpen">
+            <ul *ngIf="!!isLoginedIn()">
+                <li><a [class.active]="isActiveUrl('/dashboard')" [routerLink]="'/dashboard'"
+                        class="nav-link">Dashboard</a></li>
+                <li><a [class.active]="isActiveUrl('/accounts')" [routerLink]="'/accounts'" class="nav-link">Comptes</a>
+                </li>
+                <li><a [class.active]="isActiveUrl('/transactions')" [routerLink]="'/transactions'"
+                        class="nav-link">Transactions</a>
+                </li>
+            </ul>
+            <div *ngIf="!isLoginedIn()" class="auth-buttons">
+                <a routerLink="/login" class="btn-login">Connexion</a>
+                <a routerLink="/register" class="btn-signup">Ouvrir un compte</a>
+            </div>
+            <div *ngIf="!!isLoginedIn()" class="auth-buttons">
+                <button (click)="navigateToProfile()" class="btn-profile">Mon Profile</button>
+            </div>
+        </nav>
+    </div>
+</header>
