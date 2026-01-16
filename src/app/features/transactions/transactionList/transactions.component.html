@@ -97,7 +97,12 @@
                 <span
                   [class.text-warning]="t.status !== 'completed'">
                   {{t.status}}
-                </span>
+                </span><br>
+                <button
+                  class="btn btn-sm btn-outline-secondary mt-2"
+                  (click)="openDetails(t)">
+                  Détails
+                </button>
               </div>
             </div>
 
@@ -122,6 +127,83 @@
       <!-- Aucun résultat -->
       <div *ngIf="!loading && transactions.length === 0" class="text-center text-muted">
         Aucune transaction disponible
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Détails Transaction -->
+<div class="modal fade" id="transactionDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Détails de la transaction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" *ngIf="selectedTransaction">
+
+        <!-- Avatar + Nom -->
+        <div class="d-flex align-items-center mb-3">
+          <div class="avatar avatar-lg me-3">
+            {{
+              selectedTransaction.emitter.owner.name === currentUser?.name
+              ? selectedTransaction.receiver.owner.name.charAt(0)
+              : selectedTransaction.emitter.owner.name.charAt(0)
+            | uppercase }}
+          </div>
+
+          <div>
+            <strong>
+              {{
+                selectedTransaction.emitter.owner.name === currentUser?.name
+                ? selectedTransaction.receiver.owner.name
+                : selectedTransaction.emitter.owner.name
+              }}
+            </strong>
+            <div class="text-muted small">
+              {{
+                selectedTransaction.emitter.owner.name === currentUser?.name
+                ? 'Receveur'
+                : 'Émetteur'
+              }}
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <p><strong>ID :</strong> {{ selectedTransaction.id }}</p>
+
+        <p>
+          <strong>Date :</strong>
+          {{ selectedTransaction.emittedAt | date:'dd/MM/yyyy HH:mm' }}
+        </p>
+
+        <p>
+          <strong>Statut :</strong>
+          <span
+            class="badge"
+            [class.bg-success]="selectedTransaction.status === 'completed'"
+            [class.bg-warning]="selectedTransaction.status === 'pending'"
+            [class.bg-danger]="selectedTransaction.status === 'failed' || selectedTransaction.status === 'canceled'">
+            {{ selectedTransaction.status }}
+          </span>
+        </p>
+
+        <p>
+          <strong>Description :</strong><br>
+          {{ selectedTransaction.description }}
+        </p>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
       </div>
 
     </div>

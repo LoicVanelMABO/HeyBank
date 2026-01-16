@@ -8,6 +8,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 import { Account } from '../../../core/models/account/Account';
 import { Router, RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
+import {Modal} from 'bootstrap';
 
 @Component({
   selector: 'app-transactions',
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './transactions.component.css'
 })
 export class TransactionsComponent implements OnInit {
+  selectedTransaction!: Transaction;
   // État de l'affichage
   allTransaction = false;
   loading = false;
@@ -123,5 +125,14 @@ export class TransactionsComponent implements OnInit {
 
   lessTrans(): void {
     this.allTransaction = false;
+  }
+
+  openDetails(transaction: Transaction) {
+    this.selectedTransaction = transaction;
+      const modalEl = document.getElementById('transactionDetailsModal');
+      if (modalEl) {
+        const modal = new Modal(modalEl);
+        modal.show();
+      }
   }
 }
