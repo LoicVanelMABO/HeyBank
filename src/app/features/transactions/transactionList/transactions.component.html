@@ -66,6 +66,14 @@
                 </small>
                 
                 <h6 class="mb-1">{{ t.description }}</h6>
+                <!-- Id de la transaction -->
+                <small class="text-muted copy-wrapper">
+                  ID Transaction : {{ t.id }}
+                  <i class="fa-regular fa-copy copy-icon"
+                  title="Copier l'ID du compte"
+                  (click)="copyToClipboard(t.id)">
+                </i>
+                </small>
               </div>
 
               <div>

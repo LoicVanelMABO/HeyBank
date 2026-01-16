@@ -97,6 +97,13 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
+  copyToClipboard(valueToCopy: string) {
+  navigator.clipboard.writeText(valueToCopy).then(() => {
+    alert('Copié : '+valueToCopy);
+  }).catch(() => {
+    console.error('Erreur lors de la copie');
+  });
+}
   get filteredTransactions(): Transaction[] {
     return this.transactions.filter(t => {
       // Filtre par description ou nom de l'autre partie
