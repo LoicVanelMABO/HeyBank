@@ -6,7 +6,7 @@ import { AccountService } from '../../../core/services/accounts/account.service'
 import { User } from '../../../core/models/auth/User';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Account } from '../../../core/models/account/Account';
-import { Router, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import {Modal} from 'bootstrap';
 
@@ -40,13 +40,14 @@ export class TransactionsComponent implements OnInit {
     private transactionService: TransactionService,
     private accountService: AccountService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    // Récupérer accountId depuis le state de navigation
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras.state) {
-      this.accountId = navigation.extras.state['accountId'];
-    }
+    // Récupérer accountId depuis l'URL
+  this.route.paramMap.subscribe(params => {
+    this.accountId = params.get('accountId') || '';
+  });
+    
   }
 
   ngOnInit(): void {
@@ -99,6 +100,13 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
+  copyToClipboard(valueToCopy: string) {
+  navigator.clipboard.writeText(valueToCopy).then(() => {
+    alert('Copié : '+valueToCopy);
+  }).catch(() => {
+    console.error('Erreur lors de la copie');
+  });
+}
   get filteredTransactions(): Transaction[] {
     return this.transactions.filter(t => {
       // Filtre par description ou nom de l'autre partie

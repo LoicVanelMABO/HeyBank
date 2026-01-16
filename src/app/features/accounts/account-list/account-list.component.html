@@ -79,9 +79,9 @@
             <button class="btn btn-primary" [routerLink]="['/accounts', account.id]">
               Voir les détails
             </button>
-            <button class="btn btn-secondary" [routerLink]="['/transactions']" [state]="{ accountId: account.id }">
-              Transactions
-            </button>
+     <button class="btn btn-secondary" [routerLink]="['/transactions', account.id]">
+  Transactions
+</button>
           </div>
 
         </div>

@@ -50,12 +50,13 @@ export const routes: Routes = [
         path: 'transactions/create',
         component: CreateTransactionComponent
     },
+
     {
-        canActivate: [authGuard],
-        title: 'Transactions',
-        path: 'transactions',
-        component: TransactionsComponent
-    },
+  canActivate: [authGuard],
+  title: 'Transactions',
+  path: 'transactions/:accountId', 
+  component: TransactionsComponent
+},
     {
         canActivate: [authGuard],
         title: 'Profile',

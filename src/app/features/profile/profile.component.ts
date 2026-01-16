@@ -25,6 +25,14 @@ export class ProfileComponent implements OnInit {
     this.loadUserProfile();
   }
 
+    copyToClipboard(valueToCopy: string) {
+  navigator.clipboard.writeText(valueToCopy).then(() => {
+    alert('Copié : '+valueToCopy);
+  }).catch(() => {
+    console.error('Erreur lors de la copie');
+  });
+}
+
   loadUserProfile() {
     this.isLoading = true;
     this.error = null;

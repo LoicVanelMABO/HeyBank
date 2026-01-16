@@ -150,3 +150,22 @@
     font-size: 14px;
   }
 }
+
+
+.copy-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 14px;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.copy-icon:hover {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
