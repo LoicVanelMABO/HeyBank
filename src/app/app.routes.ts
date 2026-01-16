@@ -53,7 +53,7 @@ export const routes: Routes = [
     {
         canActivate: [authGuard],
         title: 'Transactions',
-        path: 'transactions',
+        path: 'transactions/:accountId',
         component: TransactionsComponent
     },
     {
