@@ -22,7 +22,10 @@
       <h1 class="profile-name">{{ user.name }}</h1>
       <div class="profile-detail">
         <span class="detail-label">Code client</span>
-        <span class="detail-value">{{ user.clientCode }}</span>
+        <span class="detail-value copy-wrapper">{{ user.clientCode }}  <i class="fa-regular fa-copy copy-icon"
+                  title="Copier votre code client"
+                  (click)="copyToClipboard(user.clientCode)">
+                </i> </span>
       </div>
     </div>
 
